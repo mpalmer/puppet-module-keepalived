@@ -4,5 +4,5 @@ virtual_server <%= @address %> <%= @port %> {
 <% end -%>
 	delay_loop <%= @delay_loop %>
 	lb_algo <%= @algorithm %>
-	lb_mode <%= @forwarding %>
+	lb_kind <%= @forwarding %>
 	protocol <%= @protocol %>
