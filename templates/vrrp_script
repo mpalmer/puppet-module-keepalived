@@ -1,0 +1,13 @@
+vrrp_script <%= @name %> {
+	script "<%= @script %>"
+	interval <%= @interval %>
+<% if @weight -%>
+	weight <%= @weight %>
+<% end -%>
+<% if @rise -%>
+	rise <%= @rise %>
+<% end -%>
+<% if @fall -%>
+	fall <%= @fall %>
+<% end -%>
+}

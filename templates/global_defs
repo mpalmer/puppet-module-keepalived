@@ -1,0 +1,19 @@
+global_defs {
+	router_id <%= @name %>
+	notification_email {
+<% @notification_email_to.each do |email| -%>
+		<%= email %>
+<% end -%>
+	}
+
+<% if @notification_email_from -%>
+	notification_email_from <%= @notification_email_from %>
+<% end -%>
+<% if @smtp_server -%>
+	smtp_server <%= @smtp_server %>
+<% end -%>
+<% if @smtp_connect_timeout -%>
+	smtp_connect_timeout <%= @smtp_connect_timeout %>
+<% end -%>
+}
+

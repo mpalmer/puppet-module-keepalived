@@ -1,0 +1,53 @@
+vrrp_instance <%= @name %> {
+	state <%= @initial_master ? 'MASTER' : 'SLAVE' %>
+<% if @smtp_alert -%>
+	smtp_alert
+<% end -%>
+	interface <%= @interface %>
+	priority <%= @priority %>
+	virtual_router_id <%= @virtual_router_id %>
+<% unless @track_scripts.empty? -%>
+
+	track_script {
+<%   @track_scripts.each do |ts| -%>
+		<%= ts %>
+<%   end -%>
+	}
+<% end -%>
+<% unless @track_interfaces.empty? -%>
+
+	track_interface {
+<%   @track_interfaces.each do |ti| -%>
+		<%= ti %>
+<%   end -%>
+	}
+<% end -%>
+<% unless @virtual_ipaddresses.empty? -%>
+
+	virtual_ipaddress {
+<%   @virtual_ipaddresses.each do |ip| -%>
+		<%= ip %>
+<%   end -%>
+	}
+<% end -%>
+<% unless @virtual_routes.empty? -%>
+
+	virtual_ipaddress {
+<%   @virtual_routes.each do |route| -%>
+		<%= route %>
+<%   end -%>
+	}
+<% end -%>
+<% if @notify_master -%>
+	notify_master <%= @notify_master %>
+<% end -%>
+<% if @notify_slave -%>
+	notify_slave <%= @notify_slave %>
+<% end -%>
+<% if @notify_fault -%>
+	notify_fault <%= @notify_fault %>
+<% end -%>
+<% if @notify_all -%>
+	notify_all <%= @notify_all %>
+<% end -%>
+}

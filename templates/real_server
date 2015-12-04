@@ -1,0 +1,50 @@
+	real_server <%= @address %> <%= @port %> {
+		weight <%= @weight %>
+<% if @inhibit_on_failure -%>
+		inhibit_on_failure
+<% end -%>
+<% if @notify_up -%>
+		notify_up <%= @notify_up %>
+<% end -%>
+<% if @notify_down -%>
+		notify_down <%= @notify_down %>
+<% end -%>
+
+<% if @health_check -%>
+		<%= @health_check %> {
+<%   if @health_check_port -%>
+			connect_port <%= @health_check_port %>
+<%   end -%>
+<%   if @health_check_bindto -%>
+			bindto <%= @health_check_bindto %>
+<%   end -%>
+<%   if @health_check_connect_timeout -%>
+			connect_timeout <%= @health_check_connect_timeout %>
+<%   end -%>
+<%   if @health_check_retries -%>
+			nb_get_retry <%= @health_check_retries %>
+<%   end -%>
+<%   if @health_check_retry_delay -%>
+			delay_before_retry <%= @health_check_retry_delay %>
+<%   end -%>
+<%   if @health_check_script -%>
+			misc_path <%= @health_check_script %>
+<%   end -%>
+<%   if @health_check_script_dynamic -%>
+			misc_dynamic
+<%   end -%>
+
+<%   if @health_check_url_path -%>
+			url {
+				path <%= @health_check_url_path %>
+<%     if @health_check_url_digest -%>
+				digest <%= @health_check_url_digest %>
+<%     end -%>
+<%     if @health_check_url_status_code -%>
+				status_code <%= @health_check_url_status_code %>
+<%     end -%>
+			}
+<%   end -%>
+		}
+<% end -%>
+	}
