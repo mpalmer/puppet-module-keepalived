@@ -10,7 +10,7 @@ define keepalived::server(
 	bitfile { "/etc/keepalived/keepalived.conf":
 		owner  => "root",
 		group  => "root",
-		mode   => 0440,
+		mode   => "0440",
 		notify => Service["keepalived"],
 	}
 
